@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "change_this_secret")  # Use env variable
+app.secret_key = os.environ.get("SECRET_KEY", "change_this_secret")  
 
 DATABASE = os.path.join(os.path.dirname(__file__), "ibems.db")
 
@@ -170,3 +170,4 @@ def view_history(record_id):
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host="0.0.0.0")
+
