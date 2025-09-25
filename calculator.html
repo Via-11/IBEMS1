@@ -1,0 +1,32 @@
+<h2>Iot - Based Energy Monitoring System (IBEMS)</h2>
+<p>Welcome, {{ session['user'] }} | <a href="/logout">Logout</a></p>
+<hr>
+<form method="post">
+    Appliance: <input type="text" name="appliance" required><br><br>
+    Power (Watts): <input type="number" name="power" step="0.01" required><br><br>
+    Rate (₱/kWh): <input type="number" name="rate" step="0.01" required><br><br>
+    Start Date: <input type="date" name="start_date" required><br><br>
+    End Date: <input type="date" name="end_date" required><br><br>
+    Default Hours per Day: <input type="number" name="hours" step="0.1" required><br><br>
+    Adjustments (day=hours, e.g. 10=2,11=0,12=6): <input type="text" name="changes"><br><br>
+    <button type="submit">Calculate</button>
+</form>
+
+{% if result %}
+<h3>Results for {{ result['appliance'] }}</h3>
+<p>Total Days: {{ result['days'] }}</p>
+<p>Total Hours: {{ result['total_hours'] }}</p>
+<p>Total kWh: {{ result['kwh'] }}</p>
+<p>Estimated Bill: ₱{{ result['bill'] }}</p>
+{% endif %}
+
+<hr>
+<h3>History</h3>
+<ul>
+{% for row in history %}
+    <li>
+        {{ row['start_date'] }} to {{ row['end_date'] }} | ₱{{ row['total_bill'] }}
+        [<a href="/history/{{ row['id'] }}">Details</a>]
+    </li>
+{% endfor %}
+</ul>

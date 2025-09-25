@@ -1,0 +1,16 @@
+<h2>Calculation Details</h2>
+<p><b>Appliance:</b> {{ record['appliance'] }}</p>
+<p><b>Date Range:</b> {{ record['start_date'] }} to {{ record['end_date'] }}</p>
+<p><b>Power:</b> {{ record['power_w'] }} W</p>
+<p><b>Rate:</b> ₱{{ record['rate'] }}/kWh</p>
+<p><b>Total kWh:</b> {{ record['total_kwh'] }}</p>
+<p><b>Total Bill:</b> ₱{{ record['total_bill'] }}</p>
+
+<h3>Daily Breakdown</h3>
+<ul>
+{% for i, hrs in enumerate(daily_list, start=1) %}
+    <li>Day {{ i }}: {{ hrs }} hours</li>
+{% endfor %}
+</ul>
+
+<p><a href="/calculator">← Back</a></p>
